@@ -195,7 +195,7 @@ CO_ReturnError_t CO_init(
         uint8_t                 nodeId,
         uint16_t                bitRate)
 {
-
+	static uint8_t fakeRPDOState = CO_NMT_OPERATIONAL;
     int16_t i;
     CO_ReturnError_t err;
 #ifndef CO_USE_GLOBALS
@@ -469,7 +469,7 @@ CO_ReturnError_t CO_init(
                 CO->em,
                 CO->SDO[0],
                 CO->SYNC,
-               &CO->NMT->operatingState,
+		        &fakeRPDOState, //&CO->NMT->operatingState,
                 nodeId,
                 ((i<4) ? (CO_CAN_ID_RPDO_1+i*0x100) : 0),
                 0,
